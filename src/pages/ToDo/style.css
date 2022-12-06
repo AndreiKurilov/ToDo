@@ -1,0 +1,52 @@
+.todo-article 
+{
+  /* width: 280px; */
+  height: 400px;
+  overflow-y: auto;
+  padding: 15px;
+  background: #ddd;
+  border-radius: 4px;
+}
+
+.popup-overlay
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0, .3);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.popup 
+{
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0, .3);
+  padding: 20px;
+  position: relative;
+  border-radius: 4px;
+}
+
+
+.popup .btn-close 
+{
+  position: absolute;
+  top: 15px; right: 15px;
+}
+
+.columnsToDo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.columnToDo {
+  margin: 8px;
+}
