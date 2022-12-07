@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { v4 as uuid  } from 'uuid';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 
 
 const onDragEnd = (result, columns, setColumns) => {
@@ -46,18 +46,17 @@ export const ToDo = connect(state => state.project)((props) => {
 
   let { addPopup, editPopup, Todos, dispatch } = props;
   
-  const page = useParams()
-
+  const page = useParams();
 
   const getStatusTodos = (status) => {
     return Todos.filter((el) => el.status == status && el.project_id == page.id)
-  }
+  };
 
   const columnsToDo = {
     [uuid()]: { name: "Queue", items: getStatusTodos(0), status: 0 },
     [uuid()]: { name: "Development", items: getStatusTodos(1), status: 1 },
     [uuid()]: { name: "Done", items: getStatusTodos(2), status: 2 },
-    };
+  };
   
   const [columns, setColumns] = useState(columnsToDo);
 
@@ -65,45 +64,43 @@ export const ToDo = connect(state => state.project)((props) => {
     setColumns(columnsToDo)
   }, [Todos]);
 
-  function searchTodos(e)
-  {
+  function searchTodos(e) {
+    
     console.log(e.target.value)
 
-    const current_card = document.querySelectorAll('.columnToDo')[e.target.dataset.id]
+    const current_card = document.querySelectorAll('.columnToDo')[e.target.dataset.id];
 
     const todo_nums = current_card.querySelectorAll('.todo_num');
+    
     const todo_titles = current_card.querySelectorAll('.todo_title');
 
     todo_nums.forEach((num, index) => {
 
       let num_result = num.textContent.toLowerCase().includes(e.target.value.toLowerCase());
 
-      let title_result = todo_titles[index].textContent.toLowerCase().includes(e.target.value.toLowerCase())
+      let title_result = todo_titles[index].textContent.toLowerCase().includes(e.target.value.toLowerCase());
 
       if(num_result || title_result)
-        num.closest('.alert').style.display = 'block'
+        num.closest('.alert').style.display = 'block';
       else 
-        num.closest('.alert').style.display = 'none'
+        num.closest('.alert').style.display = 'none';
     })
-
-
-
   }
 
-  function pickUp(e, id)
-  {
-    console.log(id)
-    console.log(e.target.parentElement.id)
-    console.log('ok pick up')
+  // function pickUp(e, id) {
 
-    let todos = Todos.find((el) => el.id == id)
-    todos.status = e.target.parentElement.id
+  //   console.log(id)
+  //   console.log(e.target.parentElement.id)
+  //   console.log('ok pick up')
 
-    localStorage.setItem('todos', JSON.stringify(props))
+  //   let todos = Todos.find((el) => el.id == id)
+  //   todos.status = e.target.parentElement.id
+
+  //   localStorage.setItem('todos', JSON.stringify(props))
 
     //dispatch({ type: 'PICK_UP', payload: { id, status: e.target.parentElement.id }})
    
-  }
+  // }
 
   return (
     <>
@@ -191,206 +188,3 @@ export const ToDo = connect(state => state.project)((props) => {
   </>
   );
 })
-
-
-
-
-
-
-
-
-
-
-
-
-// export const ToDo = connect(state => state.project)(({ addPopup, editPopup, Todos, dispatch }) => {
-  
-
-//   const getTodos = (status) => {
-//     return Todos.filter((el) => el.status == status)
-//   }
-
-
-//   const getDate = (value) => {
-//     return new Date(Date.parse(value)).toLocaleDateString()
-//   }
-
-
-//   return (
-//     <>
-//       <h1>ToDo page</h1>
-
-//       <button className="btn btn-outline-success" onClick={ () => dispatch({ type: 'OPEN_ADD' })}>+ Todo</button>
-      
-// ???????????????????????????????????????
-
-      // <div className="mt-5 row">
-      //   <div className='col'>
-
-      //   <div className="todo-article">
-      //       <h3 className="text-secondary">Queue</h3>
-
-      //       <div className='article-body'>
-      //         { getTodos(0).map((el) => (
-      //           <div className='alert alert-secondary' key={el.id} style={{ cursor: 'pointer' }} onClick={ () => dispatch({ type: 'OPEN_EDIT', payload: el.id })}>
-      //             {/* <p className='text-primary' style={{ fontSize: '10px'}}>Create: { getDate(el.date_create) }</p>
-      //             <p className='text-primary' style={{ fontSize: '10px'}}>End: { getDate(el.date_end) }</p> */}
-                  
-      //             { el.title }
-      //           </div>
-      //         ))}
-              
-      //       </div>
-      //   </div>
-
-{/* ????????????????????????????????????????????? */}
-
-
-{/* //         </div>
-
-//         <div className='col'>
-//         <div className="todo-article">
-//             <h3 className="text-warning">Development</h3>
-
-//             <div className='article-body'>
-//               { getTodos(1).map((el) => (
-                <div className='alert alert-secondary' key={el.id} style={{ cursor: 'pointer' }} onClick={ () => dispatch({ type: 'OPEN_EDIT', payload: el.id })}> */}
-{/* //                 <p className='text-primary' style={{ fontSize: '10px'}}>Create: { getDate(el.date_create) }</p>
-//                   <p className='text-primary' style={{ fontSize: '10px'}}>End: { getDate(el.date_end) }</p> */}
-                
-{/* //                 { el.title }
-//               </div>
-//               ))}
-              
-//             </div>
-        </div> */}
-{/* //         </div>
-
-//         <div className='col'>
-//         <div className="todo-article">
-//             <h3 className="text-success">Done</h3>
-
-//             <div className='article-body'>
-//               { getTodos(2).map((el) => ( */}
-{/* //                 <div className='alert alert-secondary' key={el.id} style={{ cursor: 'pointer' }} onClick={ () => dispatch({ type: 'OPEN_EDIT', payload: el.id })}>
-//                 <p className='text-primary' style={{ fontSize: '10px'}}>Create: { getDate(el.date_create) }</p>
-//                   <p className='text-primary' style={{ fontSize: '10px'}}>End: { getDate(el.date_end) }</p>
-                
-//                 { el.title }
-//               </div>
-//               ))}
-              
-//             </div>
-//         </div> */}
-//         </div>
-//       </div>
-
-//       { addPopup ? <AddToDo /> : null }
-//       { editPopup ? <EditToDo /> : null }
-
-//     </>
-//   )
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export const ToDo = connect(state => state.project)(({ addPopup, editPopup, Todos, dispatch }) => {
-
-//   useEffect(() => {
-//     moveEl()
-//   }, [])
-
-
-
-
-//   const getTodos = (status) => {
-//     return Todos.filter((el) => el.status == status)
-//   }
-
-
-//   const getDate = (value) => {
-//     return new Date(Date.parse(value)).toLocaleDateString()
-//   }
-
-
-//   return (
-//     <>
-//       <h1>ToDo page</h1>
-
-//       <button className="btn btn-outline-success" onClick={ () => dispatch({ type: 'OPEN_ADD' })}>+ Todo</button>
-      
-//       <div className="mt-5 row">
-//         <div className='col'>
-
-        
-//         <div className="todo-article" onMouseDown={pickDown} onMouseUp={pickUp}>
-//             <h3 className="text-secondary">Queue</h3>
-
-//             <div className='article-body'>
-//               { getTodos(0).map((el) => (
-//                 <div className='alert alert-secondary' key={el.id} style={{ cursor: 'pointer' }} onClick={ () => dispatch({ type: 'OPEN_EDIT', payload: el.id })}>
-//                   <p className='text-primary' style={{ fontSize: '10px'}}>Create: { getDate(el.date_create) }</p>
-//                   <p className='text-primary' style={{ fontSize: '10px'}}>End: { getDate(el.date_end) }</p>
-                  
-//                   { el.title }
-//                 </div>
-//               ))}
-              
-//             </div>
-//         </div>
-
-//         </div>
-
-//         <div className='col'>
-//         <div className="todo-article">
-//             <h3 className="text-warning">Development</h3>
-
-//             <div className='article-body'>
-//               { getTodos(1).map((el) => (
-//                 <div className='alert alert-secondary' key={el.id} style={{ cursor: 'pointer' }} onClick={ () => dispatch({ type: 'OPEN_EDIT', payload: el.id })}>
-//                 <p className='text-primary' style={{ fontSize: '10px'}}>Create: { getDate(el.date_create) }</p>
-//                   <p className='text-primary' style={{ fontSize: '10px'}}>End: { getDate(el.date_end) }</p>
-                
-//                 { el.title }
-//               </div>
-//               ))}
-              
-//             </div>
-//         </div>
-//         </div>
-
-//         <div className='col'>
-//         <div className="todo-article">
-//             <h3 className="text-success">Done</h3>
-
-//             <div className='article-body'>
-//               { getTodos(2).map((el) => (
-//                 <div className='alert alert-secondary' key={el.id} style={{ cursor: 'pointer' }} onClick={ () => dispatch({ type: 'OPEN_EDIT', payload: el.id })}>
-//                 <p className='text-primary' style={{ fontSize: '10px'}}>Create: { getDate(el.date_create) }</p>
-//                   <p className='text-primary' style={{ fontSize: '10px'}}>End: { getDate(el.date_end) }</p>
-                
-//                 { el.title }
-//               </div>
-//               ))}
-              
-//             </div>
-//         </div>
-//         </div>
-//       </div>
-
-//       { addPopup ? <AddToDo /> : null }
-//       { editPopup ? <EditToDo /> : null }
-
-//     </>
-//   )
-// })

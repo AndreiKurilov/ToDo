@@ -16,11 +16,11 @@ const initialState = JSON.parse(localStorage.getItem('todos')) || {
     status: 0,
     time: 0
   }
-}
+};
 
 const saveStorage = (state) => {
   localStorage.setItem('todos', JSON.stringify(state))
-}
+};
 
 let timer;
 
@@ -29,18 +29,17 @@ const startTime = (time) => {
     timer = setInterval(() => {
       console.log(time++)
     }, 1000)
-}
+};
 
 const stopTime = () => {
     clearInterval(timer)
-}
-
+};
 
 
 export const project = (state = initialState, action) => {
   
-  switch(action.type)
-  {
+  switch(action.type) {
+
     case 'OPEN_ADD': return { ...state, addPopup: true }
     case 'CLOSE_ADD': return { ...state, addPopup: false }
 
@@ -60,12 +59,8 @@ export const project = (state = initialState, action) => {
 
       return new_state;
 
-    //////////////////////////////////////////////
-
     case 'OPEN_EDIT': 
       let todo_edit = state.Todos.find((el) => el.id == action.payload)
-
-      console.log(todo_edit)
 
       startTime(todo_edit.time)
     
@@ -91,19 +86,14 @@ export const project = (state = initialState, action) => {
 
       return remove_state;
 
-
     case 'CLOSE_EDIT': 
       stopTime()
       return { ...state, editPopup: false }
-
-    ////////////////////////////////////////
 
     case 'PICK_UP': 
       let todos_up = [ ...state.Todos ]
       let todo_up = todos_up.find((el) => el.id == action.payload.id)
       todo_up.status = action.payload.status
-
-      console.log(action.payload.status)
 
       saveStorage({ ...state, Todos: todos_up })
 

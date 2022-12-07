@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 
 export const EditToDo = connect(state => state.project)(({ todo, dispatch }) => {
 
-
   const editTodo = (e) => {
     e.preventDefault()
 
@@ -11,12 +10,14 @@ export const EditToDo = connect(state => state.project)(({ todo, dispatch }) => 
 
   return (
     <>
-    <div className="popup-overlay">
+      <div className="popup-overlay">
         <div className="popup">
+          
           <button className='btn btn-close' onClick={ () => dispatch({ type: 'CLOSE_EDIT' })}></button>
           <h4>Edit todo</h4>
 
           <form onSubmit={ (e) => editTodo(e) }>
+            
             <div className='py-0'>
               <label className='form-label'>Title:</label>
               <input type="text" className="form-control" name="title" onInput={ (e) => dispatch({ type: 'SET_TODO', payload: e.target })} defaultValue={todo.title} />
@@ -51,9 +52,6 @@ export const EditToDo = connect(state => state.project)(({ todo, dispatch }) => 
                 </div>
               </div>
             </div>
-            
-
-            
 
             <div className='py-0'>
               <label className='form-label'>Add todos:</label>
@@ -66,11 +64,6 @@ export const EditToDo = connect(state => state.project)(({ todo, dispatch }) => 
             </div>
 
           </form>
-
-        
-         
-
-
 
         </div>
       </div>

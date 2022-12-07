@@ -1,6 +1,5 @@
 .todo-article 
 {
-  /* width: 280px; */
   height: 400px;
   overflow-y: auto;
   padding: 15px;
@@ -16,7 +15,6 @@
   width: 100%;
   height: 100%;
   background: rgba(0,0,0, .3);
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +31,6 @@
   position: relative;
   border-radius: 4px;
 }
-
 
 .popup .btn-close 
 {
