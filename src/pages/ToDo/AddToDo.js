@@ -1,7 +1,7 @@
-import { connect } from "react-redux"
-import { useParams } from 'react-router-dom'
+import { connect } from "react-redux";
+import { useParams } from 'react-router-dom';
 
-export const AddToDo = connect(state => state.project)(({ Todos, dispatch }) => {
+export const AddToDo = connect(state => state.project)(({ Todos, todo, dispatch }) => {
 
   const page = useParams()
 
@@ -27,8 +27,8 @@ export const AddToDo = connect(state => state.project)(({ Todos, dispatch }) => 
             </div>
 
             <div className='py-0'>
-              <label className='form-label'>Text:</label>
-              <textarea className="form-control" rows="3" name="text" onInput={ (e) => dispatch({ type: 'SET_TODO', payload: e.target })}></textarea>
+              <label className='form-label'>Description:</label>
+              <textarea className="form-control" rows="3" name="text" onInput={ (e) => dispatch({ type: 'SET_TODO', payload: e.target })}></textarea> 
             </div>
 
             <div className='py-0'>

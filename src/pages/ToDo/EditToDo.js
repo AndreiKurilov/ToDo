@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 
+
 export const EditToDo = connect(state => state.project)(({ todo, dispatch }) => {
 
   const editTodo = (e) => {
@@ -24,7 +25,7 @@ export const EditToDo = connect(state => state.project)(({ todo, dispatch }) => 
             </div>
 
             <div className='py-0'>
-              <label className='form-label'>Text:</label>
+              <label className='form-label'>Description:</label>
               <textarea className="form-control" rows="3" name="text" onInput={ (e) => dispatch({ type: 'SET_TODO', payload: e.target })} defaultValue={todo.text}></textarea>
             </div>
 
@@ -41,7 +42,8 @@ export const EditToDo = connect(state => state.project)(({ todo, dispatch }) => 
               <div className="col">
                   <div className='py-0'>
                     <label className='form-label'>Date end:</label>
-                    <input type="date" className="form-control" name="date_end" onInput={ (e) => dispatch({ type: 'SET_TODO', payload: e.target })} defaultValue={todo.date_end} />
+                    <input type="date" className="form-control" name="date_end" onInput={ (e) => dispatch({ type: 'SET_TODO', payload: e.target })} defaultValue={todo.date_end} 
+                    />
                   </div>
               </div>
               <div className="col">
@@ -70,3 +72,4 @@ export const EditToDo = connect(state => state.project)(({ todo, dispatch }) => 
     </>
   )
 })
+

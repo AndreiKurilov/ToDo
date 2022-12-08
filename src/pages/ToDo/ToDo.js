@@ -66,42 +66,25 @@ export const ToDo = connect(state => state.project)((props) => {
 
   function searchTodos(e) {
     
-    console.log(e.target.value)
-
     const current_card = document.querySelectorAll('.columnToDo')[e.target.dataset.id];
-
+    
     const todo_nums = current_card.querySelectorAll('.todo_num');
     
     const todo_titles = current_card.querySelectorAll('.todo_title');
 
     todo_nums.forEach((num, index) => {
-
+      
       let num_result = num.textContent.toLowerCase().includes(e.target.value.toLowerCase());
 
       let title_result = todo_titles[index].textContent.toLowerCase().includes(e.target.value.toLowerCase());
-
+      
       if(num_result || title_result)
         num.closest('.alert').style.display = 'block';
-      else 
+        else 
         num.closest('.alert').style.display = 'none';
     })
   }
-
-  // function pickUp(e, id) {
-
-  //   console.log(id)
-  //   console.log(e.target.parentElement.id)
-  //   console.log('ok pick up')
-
-  //   let todos = Todos.find((el) => el.id == id)
-  //   todos.status = e.target.parentElement.id
-
-  //   localStorage.setItem('todos', JSON.stringify(props))
-
-    //dispatch({ type: 'PICK_UP', payload: { id, status: e.target.parentElement.id }})
-   
-  // }
-
+  
   return (
     <>
       <h1 className="d-flex justify-content-center" style={{marginBottom: 30}}>ToDo</h1>
@@ -122,7 +105,7 @@ export const ToDo = connect(state => state.project)((props) => {
                 </div>
 
                 <div className="w-100 p-2" style={{}}>
-                  <input type="search" className="form-control" placeholder="Search text..." data-id={index} onInput={ searchTodos } />
+                  <input type="search" className="form-control" placeholder="Search number/title..." data-id={index} onInput={ searchTodos } />
                 </div>
 
 
@@ -131,8 +114,8 @@ export const ToDo = connect(state => state.project)((props) => {
                     {(provided, snapshot) => {
                       return (
                         <div id={column.status} {...provided.droppableProps}
-                          ref={provided.innerRef}
-                          style={{
+                        ref={provided.innerRef}
+                        style={{
                             background: snapshot.isDraggingOver
                             ? "lightblue"
                             : "lightgrey",
@@ -165,7 +148,6 @@ export const ToDo = connect(state => state.project)((props) => {
                                         </p>
                                       </div>
                                       <h5 className="todo_title">{item.title}</h5>
-                                      <h5>{item.status}</h5>
                                     </div>
                                   );
                                 }}

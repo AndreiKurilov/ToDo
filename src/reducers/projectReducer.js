@@ -13,7 +13,7 @@ const initialState = JSON.parse(localStorage.getItem('todos')) || {
     date_end: new Date().toISOString().slice(0, 10),
     file: '',
     add_todos: '',
-    status: 0,
+    status: '',
     time: 0
   }
 };
@@ -21,20 +21,6 @@ const initialState = JSON.parse(localStorage.getItem('todos')) || {
 const saveStorage = (state) => {
   localStorage.setItem('todos', JSON.stringify(state))
 };
-
-let timer;
-
-const startTime = (time) => {
-    
-    timer = setInterval(() => {
-      console.log(time++)
-    }, 1000)
-};
-
-const stopTime = () => {
-    clearInterval(timer)
-};
-
 
 export const project = (state = initialState, action) => {
   
@@ -62,8 +48,6 @@ export const project = (state = initialState, action) => {
     case 'OPEN_EDIT': 
       let todo_edit = state.Todos.find((el) => el.id == action.payload)
 
-      startTime(todo_edit.time)
-    
       return { ...state, todo: { ...todo_edit }, editPopup: true }
 
     case 'EDIT_TODO':
@@ -73,7 +57,6 @@ export const project = (state = initialState, action) => {
         todos_copy[todo_index] = { ...state.todo }
         let edit_state = { ...state, Todos: todos_copy, editPopup: false } 
         
-        stopTime()
         saveStorage(edit_state);
         
         return edit_state;
@@ -81,23 +64,14 @@ export const project = (state = initialState, action) => {
     case 'REMOVE_TODO':
 
       let remove_state = { ...state, Todos: state.Todos.filter((el) => el.id != action.payload), editPopup: false };
-      stopTime()
+
       saveStorage(remove_state);
 
       return remove_state;
 
     case 'CLOSE_EDIT': 
-      stopTime()
+
       return { ...state, editPopup: false }
-
-    case 'PICK_UP': 
-      let todos_up = [ ...state.Todos ]
-      let todo_up = todos_up.find((el) => el.id == action.payload.id)
-      todo_up.status = action.payload.status
-
-      saveStorage({ ...state, Todos: todos_up })
-
-      return state;
 
     default: return state;
   }

@@ -16,20 +16,3 @@ export const App = () => {
     </>
   )
 }
-
-
-
-// export const App = () => {
-//   return (
-//     <>
-//       <div className="container py-3">
-//           <BrowserRouter>
-//             <Routes>
-//               <Route path="/" element={ <Projects /> } />
-//               <Route path="/project/:id" element={ <ToDo /> } />
-//             </Routes>
-//           </BrowserRouter>
-//       </div>
-//     </>
-//   )
-// }
